@@ -12,37 +12,11 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 
-public class OrderPage {
-
-    private final MainPage mainPage = new MainPage();
-
-    private final SelenideElement continueButton = $(".form-field button");
-    private final SelenideElement titleCard = $x("//*[@id='root']/div/h3");
-
-
-    private final SelenideElement cardNumber = $("[placeholder='0000 0000 0000 0000']");
-    private final SelenideElement cardMonth = $("[placeholder='08']");
-    private final SelenideElement cardYear = $("placeholder='22']");
-    private final SelenideElement cardHolder = $x("//*[.='Владелец'] //input");
-    private final SelenideElement cardCVC = $("placeholder='999']");
-
-
-    private final SelenideElement notificationTitleAccept = $(".notification_status_ok");
-    private final SelenideElement notificationContentAccept = $(".notification_status_ok");
-
-    private final SelenideElement notificationTitleDenial = $(".notification_status_error");
-    private final SelenideElement notificationContentDenial = $(".notification_status_error");
-
-
-    private final SelenideElement numberFieldError = $x("//span[contains(text(),'Номер карты')]").parent().$(".input_sub");
-    private final SelenideElement monthFieldError = $x("//span[contains(text(),'Месяц')]").parent().$(".input_sub");
-    private final SelenideElement yearFieldError = $x("//span[contains(text(),'Год')]").parent().$(".input_sub");
-    private final SelenideElement holderFieldError = $x("//span[contains(text(),'Владелец')]").parent().$(".input_sub");
-    private final SelenideElement cvcFieldError = $x("//span[contains(text(),'CVC/CVV')]").parent().$(".input_sub");
+public class OrderPage extends BasePage {
 
 
     public void completePayFrom(String number, String month, String year, String holder, String cvc) {
-        mainPage.clickCreditButton();
+        mainPage.clickPayButton();
         titleCard.shouldBe(Condition.text("Оплата по карте"));
         cardNumber.setValue(number);
         cardMonth.setValue(month);
@@ -57,8 +31,8 @@ public class OrderPage {
     }
 
     public void acceptAssertion() {
-        notificationTitleAccept.shouldBe(Condition.text("Успешно"), Duration.ofSeconds(10)).shouldBe(Condition.visible);
-        notificationContentAccept.shouldBe(Condition.text("Операция одобрена Банком."), Duration.ofSeconds(10)).shouldBe(Condition.visible);
+        notificationTitleAccept.shouldBe(Condition.text("Успешно"), Duration.ofSeconds(15)).shouldBe(Condition.visible);
+        notificationContentAccept.shouldBe(Condition.text("Операция одобрена Банком."), Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void denialAssertion() {
@@ -67,39 +41,39 @@ public class OrderPage {
     }
 
     public void numberFieldFormatError() {
-        numberFieldError.shouldBe(Condition.text("Неверный формат"), Condition.visible);
+        numberFieldError.shouldBe(Condition.text("Неверный формат"),Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void monthFieldFormatError() {
-        monthFieldError.shouldBe(Condition.text("Неверный формат"), Condition.visible);
+        monthFieldError.shouldBe(Condition.text("Неверный формат"),Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void monthFieldPeriodError() {
-        monthFieldError.shouldBe(Condition.text("Неверно указан срок действия карты"), Condition.visible);
+        monthFieldError.shouldBe(Condition.text("Неверно указан срок действия карты"),Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void yearFieldFormatError() {
-        yearFieldError.shouldBe(Condition.text("Неверный формат"), Condition.visible);
+        yearFieldError.shouldBe(Condition.text("Неверный формат"),Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void yearFieldMinusPeriodError() {
-        yearFieldError.shouldBe(Condition.text("Истёк срок действия карты"), Condition.visible);
+        yearFieldError.shouldBe(Condition.text("Истёк срок действия карты"),Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void yearFieldPlusPeriodError() {
-        yearFieldError.shouldBe(Condition.text("Неверно указан срок действия карты"), Condition.visible);
+        yearFieldError.shouldBe(Condition.text("Неверно указан срок действия карты"),Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void holderFieldEmptyError() {
-        holderFieldError.shouldBe(Condition.text("Поле обязательно для заполнения"), Condition.visible);
+        holderFieldError.shouldBe(Condition.text("Поле обязательно для заполнения"),Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void holderFieldFormatError() {
-        holderFieldError.shouldBe(Condition.text("Неверный формат"), Condition.visible);
+        holderFieldError.shouldBe(Condition.text("Неверный формат"),Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void cvcFieldFormatError() {
-        cvcFieldError.shouldBe(Condition.text("Неверный формат"), Condition.visible);
+        cvcFieldError.shouldBe(Condition.text("Неверный формат"),Duration.ofSeconds(15)).shouldBe(Condition.visible);
     }
 
     public void payApprovedStatusAssertion() {

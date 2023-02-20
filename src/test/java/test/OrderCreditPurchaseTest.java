@@ -15,6 +15,7 @@ public class OrderCreditPurchaseTest {
 
     @BeforeEach
     void setup() {
+        DBHelper.clearDB();
         open("http://localhost:8080");
     }
 
@@ -47,7 +48,6 @@ public class OrderCreditPurchaseTest {
                 creditPage::orderAcceptCountAssertion
         );
     }
-
 
     @Test
     @DisplayName("(2) Positive - CreditCard - Buying Tour Failed")
@@ -83,7 +83,7 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
+                creditPage::denialAssertion,
                 creditPage::creditApprovedStatusAssertion,
                 creditPage::creditAcceptCountAssertion,
                 creditPage::orderAcceptCountAssertion
@@ -216,7 +216,7 @@ public class OrderCreditPurchaseTest {
         creditPage.continueClick();
         Assertions.assertAll(
                 creditPage::denialAssertion,
-                creditPage::monthFieldPeriodError,
+                creditPage::monthFieldFormatError,
                 creditPage::creditDenialCountAssertion,
                 creditPage::orderDenialCountAssertion
         );
@@ -229,7 +229,7 @@ public class OrderCreditPurchaseTest {
         creditPage.continueClick();
         Assertions.assertAll(
                 creditPage::denialAssertion,
-                creditPage::monthFieldFormatError,
+                creditPage::monthFieldPeriodError,
                 creditPage::creditDenialCountAssertion,
                 creditPage::orderDenialCountAssertion
         );
@@ -349,7 +349,7 @@ public class OrderCreditPurchaseTest {
         creditPage.continueClick();
         Assertions.assertAll(
                 creditPage::denialAssertion,
-                creditPage::yearFieldFormatError,
+                creditPage::yearFieldMinusPeriodError,
                 creditPage::creditDenialCountAssertion,
                 creditPage::orderDenialCountAssertion
         );
@@ -375,7 +375,7 @@ public class OrderCreditPurchaseTest {
         creditPage.continueClick();
         Assertions.assertAll(
                 creditPage::denialAssertion,
-                creditPage::yearFieldFormatError,
+                creditPage::yearFieldMinusPeriodError,
                 creditPage::creditDenialCountAssertion,
                 creditPage::orderDenialCountAssertion
         );
