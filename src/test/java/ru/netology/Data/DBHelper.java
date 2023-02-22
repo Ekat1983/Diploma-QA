@@ -19,7 +19,11 @@ public class DBHelper {
         val runner = new QueryRunner();
 
         try (
-                val conn = DriverManager.getConnection(System.getProperty("dbUrl"), System.getProperty("dbUser"), System.getProperty("dbPass"));
+                val conn = DriverManager.getConnection(
+                        System.getProperty("dbUrl"),
+                        System.getProperty("dbUser"),
+                        System.getProperty("dbPass")
+                );
         ) {
             runner.update(conn, deleteOrder);
             runner.update(conn, deletePayment);

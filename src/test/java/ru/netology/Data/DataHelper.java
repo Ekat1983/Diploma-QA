@@ -40,7 +40,7 @@ public class DataHelper {
     }
 
     public static String getFifteenRandomNumber() {
-        return fakerEng.numerify("#### #### #### ####");
+        return fakerEng.numerify("#### #### #### ###");
     }
 
     public static String getOneRandomNumber() {
@@ -52,7 +52,7 @@ public class DataHelper {
     }
 
     public static String getMonth(int plusMonth) {
-        return LocalDate.now().plusMonths(plusMonth).format(DateTimeFormatter.ofPattern("ММ"));
+        return LocalDate.now().plusMonths(plusMonth).format(DateTimeFormatter.ofPattern("MM"));
     }
 
     public static String getThirteenMonth() {
@@ -88,7 +88,7 @@ public class DataHelper {
     }
 
     public static String getYear(int plusYear) {
-        return LocalDate.now().plusYears(plusYear).format(DateTimeFormatter.ofPattern("уу"));
+        return LocalDate.now().plusYears(plusYear).format(DateTimeFormatter.ofPattern("yy"));
     }
 
     public static String getEmptyYear() {
