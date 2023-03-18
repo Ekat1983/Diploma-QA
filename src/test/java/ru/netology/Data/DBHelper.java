@@ -1,112 +1,102 @@
 package ru.netology.Data;
 
 import lombok.SneakyThrows;
-import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
-
 
 
 public class DBHelper {
     @SneakyThrows
     public static void clearDB() {
 
-        val deleteOrder = "DELETE FROM order_entity;";
-        val deletePayment = "DELETE FROM payment_entity;";
-        val deleteCredit = "DELETE FROM credit_request_entity;";
-        val runner = new QueryRunner();
-
-        try (
-                val conn = DriverManager.getConnection(
-                        System.getProperty("dbUrl"),
-                        System.getProperty("dbUser"),
-                        System.getProperty("dbPass")
-                );
-        ) {
-            runner.update(conn, deleteOrder);
-            runner.update(conn, deletePayment);
-            runner.update(conn, deleteCredit);
+        var deleteOrder = "DELETE FROM order_entity;";
+        var deletePayment = "DELETE FROM payment_entity;";
+        var deleteCredit = "DELETE FROM credit_request_entity;";
+        var runner = new QueryRunner();
 
 
-        }
+        var conn = getConnection();
+
+        runner.update(conn, deleteOrder);
+        runner.update(conn, deletePayment);
+        runner.update(conn, deleteCredit);
+
     }
 
     @SneakyThrows
     public static String getCreditStatusDB() {
-        val status = "SELECT status FROM credit_request_entity;";
-        val runner = new QueryRunner();
+        var status = "SELECT status FROM credit_request_entity;";
+        var runner = new QueryRunner();
         String creditStatus;
 
-        try (
-                val conn = DriverManager.getConnection(System.getProperty("dbUrl"), System.getProperty("dbUser"), System.getProperty("dbPass")
-                );
-        ) {
-            creditStatus = runner.query(conn, status, new ScalarHandler<>());
-        }
+
+        var conn = getConnection();
+
+        creditStatus = runner.query(conn, status, new ScalarHandler<>());
+
 
         return creditStatus;
     }
 
     @SneakyThrows
     public static String getPaymentStatusDB() {
-        val sql = "SELECT status FROM payment_entity;";
-        val runner = new QueryRunner();
+        var sql = "SELECT status FROM payment_entity;";
+        var runner = new QueryRunner();
         String payStatus;
 
-        try (
-                val conn = DriverManager.getConnection(System.getProperty("dbUrl"), System.getProperty("dbUser"), System.getProperty("dbPass")
-                );
-        ) {
-            payStatus = runner.query(conn, sql, new ScalarHandler<>());
-        }
+
+        var conn = getConnection();
+
+        payStatus = runner.query(conn, sql, new ScalarHandler<>());
+
 
         return payStatus;
     }
 
     @SneakyThrows
     public static long getPaymentCount() {
-        val sql = "SELECT COUNT(id) as count FROM payment_entity;";
-        val runner = new QueryRunner();
+        var sql = "SELECT COUNT(id) as count FROM payment_entity;";
+        var runner = new QueryRunner();
         long payCount;
 
-        try(
-                val conn =DriverManager.getConnection(System.getProperty("dbUrl"), System.getProperty("dbUser"), System.getProperty("dbPass")
-                );
-                ) {
-            payCount = runner.query(conn, sql, new ScalarHandler<>());
-        }
-        return  payCount;
+
+        var conn = getConnection();
+
+        payCount = runner.query(conn, sql, new ScalarHandler<>());
+
+        return payCount;
     }
 
     @SneakyThrows
     public static long getCreditCount() {
-        val sql = "SELECT COUNT(id) as count FROM credit_request_entity;";
-        val runner = new QueryRunner();
+        var sql = "SELECT COUNT(id) as count FROM credit_request_entity;";
+        var runner = new QueryRunner();
         long creditCount;
 
-        try (
-                val conn = DriverManager.getConnection(System.getProperty("dbUrl"), System.getProperty("dbUser"), System.getProperty("dbPass")
-                );
-        ) {
-            creditCount = runner.query(conn, sql, new ScalarHandler<>());
-        }
+
+        var conn = getConnection();
+
+        creditCount = runner.query(conn, sql, new ScalarHandler<>());
+
         return creditCount;
     }
 
     @SneakyThrows
     public static long getOrderCount() {
-        val sql = "SELECT COUNT(id) as count FROM order_entity;";
-        val runner = new QueryRunner();
+        var sql = "SELECT COUNT(id) as count FROM order_entity;";
+        var runner = new QueryRunner();
         long orderCount;
+        var conn = getConnection();
+        orderCount = runner.query(conn, sql, new ScalarHandler<>());
 
-        try (
-                val conn = DriverManager.getConnection(System.getProperty("dbUrl"), System.getProperty("dbUser"), System.getProperty("dbPass")
-                );
-        ) {
-            orderCount = runner.query(conn, sql, new ScalarHandler<>());
-        }
         return orderCount;
+    }
+
+    @SneakyThrows
+    private static Connection getConnection() {
+        return DriverManager.getConnection(System.getProperty("dbUrl"), System.getProperty("dbUser"), System.getProperty("dbPass"));
     }
 }

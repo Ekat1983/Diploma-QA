@@ -7,6 +7,7 @@ import page.CreditPage;
 import ru.netology.Data.DBHelper;
 import ru.netology.Data.DataHelper;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 
 public class OrderCreditPurchaseTest {
@@ -20,8 +21,8 @@ public class OrderCreditPurchaseTest {
     }
 
     @AfterEach
-    void clearDB() {
-        DBHelper.clearDB();
+    void tearDown() {
+        closeWebDriver();
     }
 
     @BeforeAll
@@ -42,10 +43,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -55,10 +56,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getDeclinedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::creditDeclinedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkCreditDeclinedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -68,9 +69,9 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getRandomNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -83,10 +84,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -96,10 +97,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getFifteenRandomNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::numberFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkNumberFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -109,10 +110,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getOneRandomNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::numberFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkNumberFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -122,10 +123,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getEmptyNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::numberFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkNumberFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -135,10 +136,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getZeroNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::numberFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkNumberFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -150,10 +151,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getFirstMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -163,10 +164,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getSecondMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -176,10 +177,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getElevenMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -189,10 +190,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getTwelveMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -202,10 +203,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getEmptyMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::monthFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkMonthFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -215,10 +216,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getZeroMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::monthFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkMonthFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -228,10 +229,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getThirteenMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::monthFieldPeriodError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkMonthFieldPeriodError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -241,10 +242,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getOneSymbolMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::monthFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkMonthFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -256,10 +257,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -269,10 +270,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -282,10 +283,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(2), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -295,10 +296,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(7), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -308,10 +309,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(8), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -321,10 +322,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getEmptyYear(), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::yearFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkYearFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -335,10 +336,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getOneSymbolYear(), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::yearFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkYearFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -348,10 +349,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(-1), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::yearFieldMinusPeriodError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkYearFieldMinusPeriodError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -361,10 +362,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(9), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::yearFieldPlusPeriodError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkYearFieldPlusPeriodError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -374,10 +375,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getZeroYear(), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::yearFieldMinusPeriodError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkYearFieldMinusPeriodError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -389,10 +390,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("???"), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -402,10 +403,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("????"), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -415,10 +416,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("??????? ???????"), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -428,10 +429,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("???????-???????"), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -441,10 +442,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("???????????????????"), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -454,10 +455,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("????????????????????"), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::creditApprovedStatusAssertion,
-                creditPage::creditAcceptCountAssertion,
-                creditPage::orderAcceptCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCreditApprovedStatus,
+                creditPage::checkCreditAcceptCount,
+                creditPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -467,10 +468,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("??"), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::holderFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkHolderFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -480,10 +481,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEmptyHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::holderFieldEmptyError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkHolderFieldEmptyError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -493,10 +494,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getDigitsHolder("########"), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::holderFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkHolderFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -506,10 +507,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getSpecialCharactersHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::holderFieldEmptyError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkHolderFieldEmptyError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -519,10 +520,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getSpacesHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::holderFieldEmptyError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkHolderFieldEmptyError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -532,10 +533,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getCyrillicHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::holderFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkHolderFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -546,10 +547,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("?????????????????????"), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::holderFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkHolderFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -561,10 +562,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::acceptAssertion,
-                creditPage::cvcFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkAcceptAssertion,
+                creditPage::checkCvcFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -574,10 +575,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getOneSymbolCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::cvcFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkCvcFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -587,10 +588,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getTwoSymbolsCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::cvcFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkCvcFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -600,10 +601,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getEmptyCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::cvcFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkCvcFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -613,10 +614,10 @@ public class OrderCreditPurchaseTest {
         creditPage.completeCreditFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getZeroSymbolsCVC());
         creditPage.continueClick();
         Assertions.assertAll(
-                creditPage::denialAssertion,
-                creditPage::cvcFieldFormatError,
-                creditPage::creditDenialCountAssertion,
-                creditPage::orderDenialCountAssertion
+                creditPage::checkDenialAssertion,
+                creditPage::checkCvcFieldFormatError,
+                creditPage::checkCreditDenialCount,
+                creditPage::checkOrderDenialCountAssertion
         );
     }
 }

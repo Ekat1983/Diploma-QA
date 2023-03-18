@@ -20,8 +20,7 @@ public class OrderPurchaseTest {
     }
 
     @AfterEach
-    void clearDB() {
-        DBHelper.clearDB();
+    void tearDown() {
         closeWebDriver();
     }
 
@@ -44,10 +43,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -58,10 +57,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getDeclinedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payDeclinedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayDeclinedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -72,9 +71,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getRandomNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -87,10 +86,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -100,9 +99,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getFifteenRandomNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::numberFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkNumberFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -112,10 +111,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getOneRandomNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::numberFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkNumberFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -125,10 +124,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getEmptyNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::numberFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkNumberFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -138,9 +137,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getZeroNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -152,10 +151,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getFirstMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -165,10 +164,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getSecondMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -178,10 +177,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getElevenMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -191,10 +190,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getTwelveMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -204,10 +203,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getEmptyMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::monthFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkMonthFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -217,9 +216,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getZeroMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::monthFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkMonthFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -229,9 +228,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getThirteenMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::monthFieldPeriodError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkMonthFieldPeriodError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -241,10 +240,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getOneSymbolMonth(), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::monthFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkMonthFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -256,10 +255,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -269,10 +268,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -282,10 +281,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(2), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -295,8 +294,8 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(7), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::yearFieldPlusPeriodError,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkYearFieldPlusPeriodError,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -306,9 +305,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(8), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::yearFieldPlusPeriodError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkYearFieldPlusPeriodError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -318,10 +317,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getEmptyYear(), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::yearFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkYearFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -332,10 +331,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getOneSymbolYear(), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::yearFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkYearFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -345,10 +344,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(-1), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::yearFieldMinusPeriodError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkYearFieldMinusPeriodError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -358,9 +357,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(9), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::yearFieldPlusPeriodError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkYearFieldPlusPeriodError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -370,9 +369,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getZeroYear(), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::yearFieldMinusPeriodError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkYearFieldMinusPeriodError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -384,10 +383,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("???"), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -397,10 +396,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("????"), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -410,10 +409,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("??????? ???????"), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -423,10 +422,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("???????-???????"), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -436,10 +435,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("???????????????????"), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -449,10 +448,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("????????????????????"), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -462,9 +461,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("??"), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -474,10 +473,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEmptyHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::denialAssertion,
-                orderPage::holderFieldEmptyError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkDenialAssertion,
+                orderPage::checkHolderFieldEmptyError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -487,9 +486,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getDigitsHolder("########"), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -499,9 +498,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getSpecialCharactersHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -511,9 +510,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getSpacesHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::holderFieldEmptyError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkHolderFieldEmptyError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -523,9 +522,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getCyrillicHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -536,9 +535,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getChoiceSymbolHolder("?????????????????????"), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -550,10 +549,10 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payApprovedStatusAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayApprovedStatusAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 
@@ -563,9 +562,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getOneSymbolCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::cvcFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkCvcFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -575,9 +574,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getTwoSymbolsCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::cvcFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkCvcFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -587,9 +586,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getEmptyCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::cvcFieldFormatError,
-                orderPage::payDenialCountAssertion,
-                orderPage::orderDenialCountAssertion
+                orderPage::checkCvcFieldFormatError,
+                orderPage::checkPayDenialCountAssertion,
+                orderPage::checkOrderDenialCountAssertion
         );
     }
 
@@ -599,9 +598,9 @@ public class OrderPurchaseTest {
         orderPage.completePayFrom(DataHelper.getApprovedNumber(), DataHelper.getMonth(0), DataHelper.getYear(0), DataHelper.getEngHolder(), DataHelper.getZeroSymbolsCVC());
         orderPage.continueClick();
         Assertions.assertAll(
-                orderPage::acceptAssertion,
-                orderPage::payAcceptCountAssertion,
-                orderPage::orderAcceptCountAssertion
+                orderPage::checkAcceptAssertion,
+                orderPage::checkPayAcceptCountAssertion,
+                orderPage::checkOrderAcceptCountAssertion
         );
     }
 }
